@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -18,17 +18,18 @@ public class Main {
         }
         Collections.sort(words);
         for (int i = 0; i < count-1; i++) {
-            if ((words.get(i).length() > words.get(i + 1).length()) ){
-                System.out.println("words.get(i).length() = " + words.get(i).length());
-                temp = words.get(i);
-                words.set(i, words.get(i+1));
-                words.set(i+1, temp);
+            for (int j = 0; j < count-i-1; j++) {
+                if ((words.get(j).length() > words.get(j + 1).length()) ){
+                    temp = words.get(j);
+                    words.set(j, words.get(j+1));
+                    words.set(j+1, temp);
+                }
             }
         }
+        words = words.stream().distinct().collect(Collectors.toList());
         for (String word : words) {
-            System.out.println("word = " + word);
+            System.out.println(word);
         }
-        //&& (words.get(i). > words.get(i + 1))
     }
 
     public static void croatia_alphabet() throws IOException {
