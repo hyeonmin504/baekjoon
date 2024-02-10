@@ -4,14 +4,38 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        croatia_alphabet();
+        words_sort();
+    }
+
+    public static void words_sort() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        List<String> words = new ArrayList<>();
+        String temp;
+
+        for (int i = 0; i < count; i++) {
+            words.add(br.readLine());
+        }
+        Collections.sort(words);
+        for (int i = 0; i < count-1; i++) {
+            if ((words.get(i).length() > words.get(i + 1).length()) ){
+                System.out.println("words.get(i).length() = " + words.get(i).length());
+                temp = words.get(i);
+                words.set(i, words.get(i+1));
+                words.set(i+1, temp);
+            }
+        }
+        for (String word : words) {
+            System.out.println("word = " + word);
+        }
+        //&& (words.get(i). > words.get(i + 1))
     }
 
     public static void croatia_alphabet() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String croatia = br.readLine();
         int count = 0;
-        int length = croatia.length();
+        int length;
 
         if (croatia.contains("c=")){
             length = croatia.length() - croatia.replaceAll("c=", "").length();
