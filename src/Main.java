@@ -4,7 +4,30 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        words_sort();
+        find_fractions();
+    }
+
+    public static void find_fractions() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        int temp = count;
+        int numerator,denominator;
+
+        for (int i = 1 ; i<=temp; i++){
+            if ( count > i ){
+                count -= i;
+            } else if (i%2 == 1) {
+                numerator = i-count+1;
+                denominator = count;
+                System.out.println(numerator + "/" + denominator);
+                break;
+            } else {
+                numerator = count;
+                denominator = i-count+1;
+                System.out.println(numerator + "/" + denominator);
+                break;
+            }
+        }
     }
 
     public static void words_sort() throws IOException {
