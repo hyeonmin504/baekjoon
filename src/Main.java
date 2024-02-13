@@ -4,7 +4,55 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        find_fractions();
+        coordinate_sort();
+    }
+
+    public static void coordinate_sort() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        List<Integer> xy = new ArrayList<Integer>();
+
+
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            xy.add(Integer.valueOf(st.nextToken()));
+            xy.add(Integer.valueOf(st.nextToken()));
+
+        }
+
+        for (int i = 0; i <count ; i++) {
+            for (int j = 0; j < count - i; j++) {
+                if (xy.get(2*j) > xy.get(2*(j+1))) {
+                    int x = xy.get(2*j);
+                    xy.set(2*j, xy.get(2*(j+1)));
+                    xy.set(2*(j+1), x);
+                    int y = xy.get(2*j+1);
+                    xy.set(2*j+1, xy.get(2*(j+1)+1));
+                    xy.set(2*(j+1)+1, y);
+                }
+            }
+        }
+    }
+
+    public static void maze_search() throws IOException { //2178
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n,m;
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        int[] nstring = new int[n];
+        int[][] nmarray = new int[n][m];
+
+        for (int i = 0; i < n; i++) {
+            nstring[i] = Integer.parseInt(br.readLine());
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < m+1; j++) {
+                nmarray[i][j-1] = nstring[i]/(10*(m-j)-(10*(m-j+1)*10));
+                System.out.println("nmarray = " + nmarray[i][j]);
+            }
+        }
     }
 
     public static void find_fractions() throws IOException {
