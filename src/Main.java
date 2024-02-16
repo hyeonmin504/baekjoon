@@ -1,12 +1,137 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
-
 public class Main {
     public static void main(String[] args) throws IOException {
-        sort_inside();
+        put_bridge();
+    }
+    public static void put_bridge() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int count = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            bw.append(String.valueOf(Combination.calculate(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())))).append("\n");
+        }
+        bw.flush();
+    }
+}
+class Combination{
+    Long n,r;
+    public Combination(Long n, Long r) {
+        this.n = n;
+        this.r = r;
+    }
+    public static long calculate(int r,int n){
+        long xr= (long)r;
+        long xn= (long)n;
+
+        if (r==0) return 0;
+        for (int i = 1; i < r; i++) xn = xn*(n-i); // 분자
+        for (int i = 1; i < r-1; i++) xr = xr*(r-i); //분모 r!
+        return xn/xr;
+    }
+}
+class Point {
+    int x,y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Person {
+    int age;
+    String name;
+    int weight, height;
+    int sequence;
+
+    public Person(int age, String name) {
+        this.age = age;
+        this.name = name;
     }
 
+    public Person(int weight, int height) {
+        this.weight = weight;
+        this.height = height;
+        this.sequence = 1;
+    }
+}
+/*
+    public static void coordinate_sort() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        Point[] point = new Point[count];
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            point[i] = new Point(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()));
+        }
+
+        Arrays.sort(point, new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                if (o1.y == o2.y) return o1.x - o2.x;
+                return o1.y-o2.y;
+            }
+        });
+
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for(int i = 0 ; i<count ; i++){
+            bw.append(point[i].x + " " + point[i].y);
+            bw.append("\n");
+        }
+        bw.flush();
+
+    }
+
+    public static void weight_height() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        Person[] person = new Person[count];
+
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            person[i] = new Person(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()));
+        }
+
+        for (int i = 0; i < count-1; i++) {
+            for (int j = i+1; j < count; j++) {
+                if ((person[i].weight > person[j].weight && person[i].height > person[j].height)){
+                    person[j].sequence++;
+                }
+                else if (person[i].weight < person[j].weight && person[i].height < person[j].height){
+                    person[i].sequence++;
+                }
+            }
+        }
+
+        for (int i = 0; i < count; i++) {
+            System.out.print(person[i].sequence+ " ");
+        }
+    }
+
+    public static void age_sort() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        Person[] person = new Person[count];
+
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            person[i] = new Person(Integer.parseInt(st.nextToken()),st.nextToken());
+        }
+
+        Arrays.sort(person, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.age - o2.age;
+            }
+        });
+
+        for (int i = 0; i < count; i++) {
+            System.out.println(person[i].age+" "+ person[i].name);
+        }
+    }
 
     public static void sort_inside() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -200,4 +325,4 @@ public class Main {
         }
         System.out.println(resultCount);
     }
-}
+}*/
