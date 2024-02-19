@@ -2,20 +2,43 @@ import java.io.*;
 import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
-        put_bridge();
+        confetti();
     }
-    public static void put_bridge() throws IOException {
+
+    public static void confetti() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int count = Integer.parseInt(br.readLine());
+        int[][] map = new int[100][100];
+        int x,y,xy=0;
 
         for (int i = 0; i < count; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            bw.append(String.valueOf(Combination.calculate(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())))).append("\n");
+            x = Integer.parseInt(st.nextToken());
+            y = Integer.parseInt(st.nextToken());
+            for (int j = x; j < x + 10; j++) {
+                for (int k = y; k < y + 10; k++) {
+                    map[j][k]++;
+                }
+            }
         }
-        bw.flush();
+        for (int j = 0; j < 100; j++) {
+            for (int k = 0; k < 100; k++) {
+                if (map[j][k]>0) xy++;
+            }
+        }
+        System.out.println(xy);
     }
 }
+
+class Point {
+    int x,y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
 class Combination{
     Long n,r;
     public Combination(Long n, Long r) {
@@ -32,15 +55,6 @@ class Combination{
         return xn/xr;
     }
 }
-class Point {
-    int x,y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 class Person {
     int age;
     String name;
@@ -59,6 +73,55 @@ class Person {
     }
 }
 /*
+    public static void yosaepus() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int count = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        int start = 2*K;
+        List<Integer> array = new ArrayList<>();
+
+        for (int i = 1; i <= count; i++) {
+            array.add(i);
+        }
+        bw.append("<" + array.get(K-1));
+        System.out.println("array.get("+(K-1)+") = " + array.get(K - 1));
+        array.remove(K-1);
+        start--;
+
+        while(!array.isEmpty()){
+            System.out.println("array.size(),K = " + array.size() + ", " + start);
+            if (start%array.size()==0||array.size() == 1) start = array.size();
+            if (array.size()<start){
+                start = start%array.size();
+                System.out.println("if");
+                continue;
+            }
+            bw.append(", " + array.get(start-1));
+            System.out.println("array.get("+(start-1)+") = " + array.get(start-1));
+            array.remove(start-1);
+            start += K-1;
+
+
+        }
+        bw.append(">");
+        bw.flush();
+    }
+
+    public static void put_bridge() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int count = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            bw.append(String.valueOf(Combination.calculate(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())))).append("\n");
+        }
+        bw.flush();
+    }
+
     public static void coordinate_sort() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int count = Integer.parseInt(br.readLine());
