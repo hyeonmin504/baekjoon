@@ -1,43 +1,37 @@
 import java.io.*;
-import java.util.*;
+import java.util.*
+
 public class Main {
-    public static void main(String[] args) throws IOException {
-        confetti();
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        number_card();
     }
-
-    public static void confetti() throws IOException {
+    public static void number_card() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int count = Integer.parseInt(br.readLine());
-        int[][] map = new int[100][100];
-        int x,y,xy=0;
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < count; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            x = Integer.parseInt(st.nextToken());
-            y = Integer.parseInt(st.nextToken());
-            for (int j = x; j < x + 10; j++) {
-                for (int k = y; k < y + 10; k++) {
-                    map[j][k]++;
-                }
+        int n, m;
+        HashMap<String, Integer> owned = new HashMap<>();
+
+        n = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        for (int i=0; i<n; i++) {
+            owned.put(st.nextToken(), 0);
+        }
+
+        m = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        for (int i=0; i<m; i++) {
+            if (owned.get(st.nextToken()) != null) {
+                sb.append("1 ");
+            } else {
+                sb.append("0 ");
             }
         }
-        for (int j = 0; j < 100; j++) {
-            for (int k = 0; k < 100; k++) {
-                if (map[j][k]>0) xy++;
-            }
-        }
-        System.out.println(xy);
+        System.out.println(sb.toString());
     }
 }
 
-class Point {
-    int x,y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 class Combination{
     Long n,r;
@@ -73,6 +67,40 @@ class Person {
     }
 }
 /*
+    public static void confetti() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        int[][] map = new int[100][100];
+        int x,y,xy=0;
+
+        for (int i = 0; i < count; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            x = Integer.parseInt(st.nextToken());
+            y = Integer.parseInt(st.nextToken());
+            for (int j = x; j < x + 10; j++) {
+                for (int k = y; k < y + 10; k++) {
+                    map[j][k]++;
+                }
+            }
+        }
+        for (int j = 0; j < 100; j++) {
+            for (int k = 0; k < 100; k++) {
+                if (map[j][k]>0) xy++;
+            }
+        }
+        System.out.println(xy);
+    }
+}
+
+class Point {
+    int x,y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
     public static void yosaepus() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
