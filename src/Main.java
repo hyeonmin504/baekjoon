@@ -3,8 +3,21 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws NumberFormatException, IOException {
-        number_card();
+        factorial_zero_count();
     }
+
+    public static void factorial_zero_count() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int startNum = Integer.parseInt(br.readLine());
+        int count =0;
+
+        count = startNum/5;
+        count += startNum/25;
+        count += startNum/125;
+
+        System.out.println(count);
+    }
+
     public static void number_card() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
