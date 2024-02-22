@@ -14,6 +14,7 @@ public class Main {
         count = startNum/5;
         count += startNum/25;
         count += startNum/125;
+        int a;
 
         System.out.println(count);
     }
